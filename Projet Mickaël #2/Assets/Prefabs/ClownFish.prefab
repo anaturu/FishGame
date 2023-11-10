@@ -278,13 +278,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a134f7e92f54f194b9d6946e93ea258a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fishSO: {fileID: 11400000, guid: 3d7fafdbc497200488f99eab17f4b7fd, type: 2}
   fishRb: {fileID: 0}
   spikePos: {fileID: 0}
   isHit: 0
-  healthPoint: 0
-  maxHealth: 20
-  addClownFishScore: 10
-  moveSpeed: 1.5
 --- !u!1 &5923624717775138652
 GameObject:
   m_ObjectHideFlags: 0
@@ -402,7 +399,7 @@ SkinnedMeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: -7184819803674296287, guid: 4390fc51962802b43b29498c67a879c0, type: 3}
-  - {fileID: -9103484930961366303, guid: 4390fc51962802b43b29498c67a879c0, type: 3}
+  - {fileID: 2100000, guid: 4d5ecf0b3195c2548be65755aed364b9, type: 2}
   - {fileID: -1084228114978833594, guid: 4390fc51962802b43b29498c67a879c0, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0

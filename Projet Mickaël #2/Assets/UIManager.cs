@@ -6,11 +6,15 @@ using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
+    [Header("Scripts")]
     public static UIManager instance;
+    [SerializeField] private FishSO fishSO;
 
+    [Header("Components")]
     [SerializeField] private TextMeshProUGUI fishCounterText;
     [SerializeField] private TextMeshProUGUI scoreText;
     
+    [Header("Values")]
     [SerializeField] public int currentOverallScore;
     [SerializeField] private int currentFishCaught;
     

@@ -7,21 +7,23 @@ using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour
 {
+    [Header("Scripts")]
     public static GameManager instance;
     
-    public List<GameObject> fishes; //List of every fishes in the game
-    
+    [Header("Components")]
+    public Camera cam;
     public GameObject clownFish;
     public GameObject dori;
+    public Transform camPosStart;
+    
+    public List<GameObject> fishes; //List of every fishes in the game
+
+    [Header("Values")]
     public int numberOfNemo;
     public int numberOfDori;
     public int timeBeforeSecondWave;
-    
-    public Transform camPosStart;
-    public Camera cam;
-    
-    
     public int shakeVibrato;
+    
 
     private void Awake()
     {
@@ -71,7 +73,7 @@ public class GameManager : MonoBehaviour
 
     public void LightScreenShake()
     {
-        cam.DOShakePosition(0.2f, Vector3.one * 0.5f, shakeVibrato, 90f, true).OnComplete(()=>
+        cam.DOShakePosition(0.2f, Vector3.one * 0.7f, shakeVibrato, 90f, true).OnComplete(()=>
         {
             cam.transform.DOMove(camPosStart.transform.position, 0.1f);
         });

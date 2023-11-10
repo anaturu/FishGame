@@ -7,21 +7,30 @@ using Random = UnityEngine.Random;
 
 public class TridentBehaviour : MonoBehaviour
 {
-    [SerializeField] private GameObject mouseGizmo;
-    [SerializeField] private Rigidbody tridentRb;
-    [SerializeField] private BoxCollider tridentBc;
-    [SerializeField] private Vector3 tridentPos;
+    [Header("Scripts")]
     private GameManager gameManager;
     private UIManager uiManager;
+    [SerializeField] private FishSO fishSO;
     
+    [Header("Components")]
+    [SerializeField] private ParticleSystem tridentParticle;
+    [SerializeField] private ParticleSystem tridentParticleFollow;
+    [SerializeField] private GameObject mouseGizmo;
+    private Rigidbody tridentRb;
+    private BoxCollider tridentBc;
+    private Vector3 tridentPos;
+    
+    [SerializeField] private List<GameObject> fishCaught = new List<GameObject>();
+    
+    [Header("Values")]
     [SerializeField] private float explosionPower;
-    [SerializeField] private float speedVelocity;
     [SerializeField] private float callBackTime;
+    private float speedVelocity;
     
+    [Header("Booleans")]
     [SerializeField] private bool throwOn;
     [SerializeField] private bool throwOff;
 
-    [SerializeField] private List<GameObject> fishCaught = new List<GameObject>();
     
 
     private void Start()
@@ -66,7 +75,7 @@ public class TridentBehaviour : MonoBehaviour
             
             fishCaught.Add(other.gameObject); //Add Fish Caught to list
             
-            uiManager.AddScoreFish(10); //Add OverallScore
+            uiManager.AddScoreFish(fishSO.addScore); //Add OverallScore
             uiManager.AddFishCounter(1); //Add FishCounter
         }
         
@@ -109,11 +118,12 @@ public class TridentBehaviour : MonoBehaviour
 
     IEnumerator TridentRecall()
     {
+        throwOn = true;
+        throwOff = false;
+        
         transform.DOMove(tridentPos, callBackTime);
         yield return new WaitForSeconds(callBackTime);
         
-        throwOn = true;
-        throwOff = false;
     }
 
     private void TridentThrow()
@@ -123,6 +133,9 @@ public class TridentBehaviour : MonoBehaviour
             
         tridentRb.AddForce((mouseGizmo.transform.position - transform.position) * explosionPower, ForceMode.Force);
         gameManager.LightScreenShake();
+        
+        tridentParticle.Play();
+        tridentParticleFollow.Play();
     }
     
 }
