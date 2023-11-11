@@ -85,7 +85,7 @@ public class GameManager : MonoBehaviour
     {
 
         Instantiate(blobFish, spawnPosBlobFish[Random.Range(0, spawnPosBlobFish.Length)]);
-        yield return new WaitForSeconds(Random.Range(1, 5));
+        yield return new WaitForSeconds(30);
 
         StartCoroutine(SpawnBlobFish());
 
