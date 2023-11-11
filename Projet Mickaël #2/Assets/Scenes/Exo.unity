@@ -12279,7 +12279,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bf69f900c725534ba941207ecc6dbf0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fishSO: {fileID: 0}
+  fishSO: {fileID: 11400000, guid: 3d7fafdbc497200488f99eab17f4b7fd, type: 2}
   fishCounterText: {fileID: 600131300}
   scoreText: {fileID: 715577036}
   currentOverallScore: 0
@@ -24285,8 +24285,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6528508882555383513}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.7284051, z: -0, w: 0.6851467}
-  m_LocalPosition: {x: -9.33, y: 3.11, z: -5.18}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: -65.4, y: 3.11, z: 4.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -24294,7 +24294,7 @@ Transform:
   - {fileID: 3090539990247064699}
   - {fileID: 1728623718}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 93.506, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!1 &2790018666436377417
 GameObject:
   m_ObjectHideFlags: 0
@@ -24466,13 +24466,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7336707487940775878}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: -7.434682e-17, y: 0.33482838, z: 0.36946574}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2714273235693928101}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!4 &3168200197512600821
 Transform:
   m_ObjectHideFlags: 0
@@ -25073,11 +25073,13 @@ MonoBehaviour:
   sharkRb: {fileID: 0}
   sharkAnimator: {fileID: 0}
   waypoint: {fileID: 298670631}
-  cooldownAttack: 2
-  moveSpeed: 1
-  isHit: 0
   healthPoint: 0
-  maxHealth: 50
+  maxHealth: 80
+  cooldownAttack: 2
+  cooldownComeback: 5
+  scaredMovementSpeed: 0.4
+  moveSpeed: 1.7
+  isScared: 0
 --- !u!65 &6528508882555383516
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -25097,8 +25099,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.1581295, y: 1.5587003, z: 2.612709}
-  m_Center: {x: -0.013650754, y: -0.38023114, z: 5.006665}
+  m_Size: {x: 2.1581295, y: 2.7256212, z: 12.156866}
+  m_Center: {x: -0.01365077, y: 0.39705563, z: 1.2012568}
 --- !u!54 &6528508882555383517
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -25107,8 +25109,8 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6528508882555383513}
   serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 1.5
+  m_Mass: 10
+  m_Drag: 2
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -25549,10 +25551,9 @@ GameObject:
   m_Component:
   - component: {fileID: 3090539990247064699}
   - component: {fileID: 6498831634817416703}
-  - component: {fileID: 7336707487940775880}
-  - component: {fileID: 7336707487940775879}
   - component: {fileID: 7336707487940775881}
   - component: {fileID: 7336707487940775882}
+  - component: {fileID: 7336707487940775883}
   m_Layer: 0
   m_Name: SharkMesh
   m_TagString: Untagged
@@ -25560,48 +25561,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!65 &7336707487940775879
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7336707487940775878}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.02690093, y: 0.019127227, z: 0.026164388}
-  m_Center: {x: 0.0010175315, y: 0.0025084515, z: 0.02029061}
---- !u!65 &7336707487940775880
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7336707487940775878}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.026946735, y: 0.09902345, z: 0.019409949}
-  m_Center: {x: 0.0010677744, y: 0.019993829, z: -0.0021787807}
 --- !u!114 &7336707487940775881
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25644,6 +25603,27 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!65 &7336707487940775883
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7336707487940775878}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.026567362, y: 0.15352662, z: 0.028148787}
+  m_Center: {x: -0.00008378294, y: 0.007130275, z: -0.0046378267}
 --- !u!4 &7344394507200185484
 Transform:
   m_ObjectHideFlags: 0
@@ -25869,7 +25849,7 @@ MonoBehaviour:
   tridentParticleFollow: {fileID: 717664399}
   mouseGizmo: {fileID: 52663649}
   fishCaught: []
-  explosionPower: 400
+  explosionPower: 500
   callBackTime: 0.2
   throwOn: 1
   throwOff: 0

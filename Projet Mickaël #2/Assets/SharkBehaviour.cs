@@ -7,19 +7,26 @@ using Random = UnityEngine.Random;
 
 public class SharkBehaviour : MonoBehaviour, IDamageable
 {
+    [Header("Scripts")]
     private GameManager gameManager;
     
+    [Header("Components")]
     [SerializeField] private Rigidbody sharkRb;
     [SerializeField] private Animator sharkAnimator;
     [SerializeField] private GameObject waypoint;
-
-    [SerializeField] private float cooldownAttack;
-    [SerializeField] private float moveSpeed;
-    private float speedVelocity;
-    [SerializeField] public bool isHit;
     
+    [Header("Values")]
     [SerializeField] private int healthPoint;
     [SerializeField] private int maxHealth = 100;
+    [SerializeField] private float cooldownAttack;
+    [SerializeField] private float cooldownComeback;
+    [SerializeField] private float scaredMovementSpeed;
+    [SerializeField] private float moveSpeed;
+    private float speedVelocity;
+    
+    [Header("Booleans")]
+    [SerializeField] public bool isScared;
+
     void Start()
     {
         gameManager = GameManager.instance;
@@ -48,6 +55,20 @@ public class SharkBehaviour : MonoBehaviour, IDamageable
         {
             sharkAnimator.SetBool("isSwimming", true);
         }
+        
+        if (healthPoint <= 0)//Death
+        {
+            transform.LookAt(waypoint.transform.position);
+            sharkRb.AddForce((waypoint.transform.position - transform.position) * scaredMovementSpeed, ForceMode.VelocityChange);
+
+            healthPoint = maxHealth;
+            
+            isScared = true;
+            //Add Score Here
+            
+            StartCoroutine(AttackFish());
+
+        }
     }
 
     
@@ -55,32 +76,22 @@ public class SharkBehaviour : MonoBehaviour, IDamageable
 
     IEnumerator AttackFish()
     {
-        if (healthPoint >= 0)
+        if (isScared)
         {
-            yield return new WaitForSeconds(1f);
-
-            Vector3 nextFishPos = gameManager.fishes[Random.Range(0, gameManager.fishes.Count - 1)].transform.position - transform.position;
-            transform.LookAt(nextFishPos);
-            sharkRb.AddForce(nextFishPos * moveSpeed, ForceMode.VelocityChange);
-            yield return new WaitForSeconds(cooldownAttack);
-        
-            StartCoroutine(AttackFish());
-        }
-        else if(healthPoint <= 0)//Death
-        {
-            StopCoroutine(AttackFish());
-            transform.LookAt(waypoint.transform.position);
-            transform.DOMove(waypoint.transform.position, 1f).SetEase(Ease.OutQuint);
-            yield return new WaitForSeconds(1f);
-
-            healthPoint = maxHealth;
-            StartCoroutine(AttackFish());
-
-
-            //Add Score Here
+            Debug.Log("IS RUNNING AWAY");
+            yield return new WaitForSeconds(cooldownComeback);
+            isScared = false;
         }
         
-        
+        Vector3 nextFishPos = gameManager.fishes[Random.Range(0, gameManager.fishes.Count - 1)].transform.position - transform.position;
+        transform.LookAt(nextFishPos);
+        sharkRb.AddForce(nextFishPos * moveSpeed, ForceMode.VelocityChange);
+        yield return new WaitForSeconds(cooldownAttack);
+
+        if (!isScared)
+        {
+            StartCoroutine(AttackFish());
+        }
     }
 
     public void TakeDamage(int damage)

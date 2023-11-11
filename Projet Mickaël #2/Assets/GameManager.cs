@@ -35,11 +35,12 @@ public class GameManager : MonoBehaviour
         }
         instance = this;
         #endregion
+        
+        StartCoroutine(FirstWave());
     }
 
     private void Start()
     {
-        StartCoroutine(FirstWave());
     }
 
     private void Update()
@@ -58,6 +59,8 @@ public class GameManager : MonoBehaviour
             Instantiate(clownFish, Random.insideUnitSphere * 10, Quaternion.identity);
             yield return new WaitForSeconds(0.2f);
         }
+        
+        
     }
 
     IEnumerator SecondWave()
@@ -78,4 +81,6 @@ public class GameManager : MonoBehaviour
             cam.transform.DOMove(camPosStart.transform.position, 0.1f);
         });
     }
+    
+    
 }

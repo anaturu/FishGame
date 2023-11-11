@@ -8,7 +8,8 @@ public class ChangeColor : MonoBehaviour
     public SkinnedMeshRenderer sharkMesh;
     public Material matBasic;
     public Material matDamage;
-    private void OnCollisionEnter(Collision other)
+
+    private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Trident"))
         {
@@ -18,10 +19,19 @@ public class ChangeColor : MonoBehaviour
 
     private IEnumerator ColorDamage()
     {
-        sharkMesh.materials[0] = matDamage;
-        yield return new WaitForSeconds(1f);
+        Material[] sharkMaterials = new Material[2];
+
+        sharkMaterials[0] = sharkMesh.materials[0];
+        sharkMaterials[1] = matDamage;
         
-        sharkMesh.materials[0] = matBasic;
+        sharkMesh.materials = sharkMaterials;
+        
+        yield return new WaitForSeconds(0.5f);
+        
+        sharkMaterials[0] = sharkMesh.materials[0];
+        sharkMaterials[1] = matBasic;
+        
+        sharkMesh.materials = sharkMaterials;
 
     }
 }
