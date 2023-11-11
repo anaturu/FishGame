@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class InteractionManagerPerfect : MonoBehaviour
 {
+    private TridentBehaviour tridentManager;
+
     [SerializeField] private Camera mainCam;
     [SerializeField] private Transform mouseWorldPosGizmo;
     [SerializeField] private float maxRange = 100;
@@ -13,10 +15,17 @@ public class InteractionManagerPerfect : MonoBehaviour
     private Vector3 mouseWorldPos;
     private Vector3 origin;
     private Vector3 dir;
-    
+
+    private void Start()
+    {
+        tridentManager = TridentBehaviour.instance;
+    }
+
     void Update()
     {
         GetMouseScreenPos();
+        
+        
     }
 
     void GetMouseScreenPos()
@@ -40,12 +49,14 @@ public class InteractionManagerPerfect : MonoBehaviour
 
             if (Physics.Raycast(origin, dir, out hit, maxRange))
             {
-                if (hit.transform.GetComponent<IDamageable>() != null) //Si l'objet touché a le script "IDamageable"
+                if (hit.transform.gameObject.CompareTag("Fish"))
                 {
-                    hit.transform.GetComponent<IDamageable>().TakeDamage(10);
+                    
+                    Debug.Log("POAEFOAEOFJAOEFJAOEFJOAEJFOAJEFOAEJFOAJEFOJEF");
                 }
             }
         }
         
     }
+    
 }

@@ -15,6 +15,10 @@ public class GameManager : MonoBehaviour
     public GameObject clownFish;
     public GameObject dori;
     public Transform camPosStart;
+    public Vector3 spawnOffset;
+    public GameObject blobFish;
+    public Transform[] spawnPosBlobFish;
+
     
     public List<GameObject> fishes; //List of every fishes in the game
 
@@ -23,6 +27,8 @@ public class GameManager : MonoBehaviour
     public int numberOfDori;
     public int timeBeforeSecondWave;
     public int shakeVibrato;
+    public float spawnRange;
+
     
 
     private void Awake()
@@ -41,6 +47,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        StartCoroutine(SpawnBlobFish());
     }
 
     private void Update()
@@ -56,7 +63,7 @@ public class GameManager : MonoBehaviour
         //1st wave
         for (int i = 0; i < numberOfNemo; i++)
         {
-            Instantiate(clownFish, Random.insideUnitSphere * 10, Quaternion.identity);
+            Instantiate(clownFish, Random.insideUnitSphere * spawnRange + spawnOffset, Quaternion.identity);
             yield return new WaitForSeconds(0.2f);
         }
         
@@ -68,10 +75,20 @@ public class GameManager : MonoBehaviour
         
         for (int i = 0; i < numberOfDori; i++)
         {
-            Instantiate(dori, Random.insideUnitSphere * 10, Quaternion.identity);
+            Instantiate(dori, Random.insideUnitSphere * spawnRange + spawnOffset, Quaternion.identity);
             yield return new WaitForSeconds(0.2f);
 
         }
+    }
+    
+    IEnumerator SpawnBlobFish()
+    {
+
+        Instantiate(blobFish, spawnPosBlobFish[Random.Range(0, spawnPosBlobFish.Length)]);
+        yield return new WaitForSeconds(Random.Range(1, 5));
+
+        StartCoroutine(SpawnBlobFish());
+
     }
 
     public void LightScreenShake()

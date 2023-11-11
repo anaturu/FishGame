@@ -10,6 +10,7 @@ TagManager:
   - Shark
   - Dori
   - Trident
+  - Blowfish
   layers:
   - Default
   - TransparentFX

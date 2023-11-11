@@ -12,7 +12,7 @@ public class UIManager : MonoBehaviour
 
     [Header("Components")]
     [SerializeField] private TextMeshProUGUI fishCounterText;
-    [SerializeField] private TextMeshProUGUI scoreText;
+    [SerializeField] private TextMeshProUGUI overallScoreText;
     [SerializeField] private TextMeshProUGUI scoreSharkText;
     
     [Header("Values")]
@@ -41,19 +41,19 @@ public class UIManager : MonoBehaviour
         currentFishCaught += fishCaught;
         fishCounterText.text = currentFishCaught + ""; //Update FishCounter
         
-        fishCounterText.DOTMPFontSize(56, 0.2f).OnComplete(() =>
+        fishCounterText.DOTMPFontSize(150, 0.2f).OnComplete(() =>
         {
-            fishCounterText.DOTMPFontSize(36, 0.1f);
+            fishCounterText.DOTMPFontSize(100, 0.1f);
         });
     }
     public void AddScoreFish(int clownFishScore)
     {
         currentOverallScore += clownFishScore;
-        scoreText.text = currentOverallScore + ""; //Update OverallScore with clownFishScore
+        overallScoreText.text = currentOverallScore + ""; //Update OverallScore with clownFishScore
         
-        scoreText.DOTMPFontSize(76, 0.1f).OnComplete(() =>
+        overallScoreText.DOTMPFontSize(150, 0.1f).OnComplete(() =>
         {
-            scoreText.DOTMPFontSize(36, 0.1f);
+            overallScoreText.DOTMPFontSize(100, 0.1f);
         });
     }
     public void AddScoreShark(int sharkScore)
@@ -61,10 +61,27 @@ public class UIManager : MonoBehaviour
         currentSharkScore += sharkScore;
         scoreSharkText.text = currentSharkScore + ""; //Update OverallScore with clownFishScore
         
-        scoreSharkText.DOTMPFontSize(76, 0.1f).OnComplete(() =>
+        scoreSharkText.DOTMPFontSize(100, 0.1f).OnComplete(() =>
         {
-            scoreSharkText.DOTMPFontSize(36, 0.1f);
+            scoreSharkText.DOTMPFontSize(70, 0.1f);
         });
+    }
+
+    public void RemoveScore(int penaltyScore)
+    {
+        currentOverallScore -= penaltyScore;
+        overallScoreText.text = currentOverallScore + "";
+
+        overallScoreText.DOTMPFontSize(100, 0.2f).OnComplete(() =>
+        {
+            overallScoreText.DOTMPFontSize(70, 0.1f);
+        });
+        
+        overallScoreText.DOColor(Color.red, 1f).OnComplete(() =>
+        {
+            overallScoreText.DOColor(Color.white, 1f);
+        });
+        
     }
     
     

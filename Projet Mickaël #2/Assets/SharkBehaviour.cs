@@ -39,7 +39,7 @@ public class SharkBehaviour : MonoBehaviour, IDamageable
         sharkAnimator = GetComponent<Animator>();
         transform.localScale = Vector3.zero;
      
-        transform.DOScale(new Vector3(1, 1, 1), 0.5f).SetEase(Ease.OutBounce);
+        transform.DOScale(new Vector3(2, 2, 2), 0.5f).SetEase(Ease.OutBounce);
         StartCoroutine(AttackFish());
     }
 
@@ -60,7 +60,7 @@ public class SharkBehaviour : MonoBehaviour, IDamageable
         
         if (healthPoint <= 0)//Death
         {
-            transform.LookAt(waypoint.transform.position);
+            transform.DOLookAt(waypoint.transform.position, 1.5f);
             sharkRb.AddForce((waypoint.transform.position - transform.position) * scaredMovementSpeed, ForceMode.VelocityChange);
 
             healthPoint = maxHealth;
@@ -69,12 +69,8 @@ public class SharkBehaviour : MonoBehaviour, IDamageable
             //Add Score Here
             
             StartCoroutine(AttackFish());
-
         }
     }
-
-    
-
 
     IEnumerator AttackFish()
     {
@@ -86,7 +82,7 @@ public class SharkBehaviour : MonoBehaviour, IDamageable
         }
         
         Vector3 nextFishPos = gameManager.fishes[Random.Range(0, gameManager.fishes.Count - 1)].transform.position - transform.position;
-        transform.LookAt(nextFishPos);
+        transform.DOLookAt(nextFishPos, 0.5f);
         sharkRb.AddForce(nextFishPos * moveSpeed, ForceMode.VelocityChange);
         yield return new WaitForSeconds(cooldownAttack);
 

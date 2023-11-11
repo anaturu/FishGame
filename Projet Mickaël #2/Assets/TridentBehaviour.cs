@@ -7,10 +7,13 @@ using Random = UnityEngine.Random;
 
 public class TridentBehaviour : MonoBehaviour
 {
-    [Header("Scripts")]
+    [Header("Scripts")] 
+    public static TridentBehaviour instance;
+
     private GameManager gameManager;
     private UIManager uiManager;
-    [SerializeField] private FishSO fishSO;
+    [SerializeField] private FishSO clownFishSO;
+    [SerializeField] private FishSO doriSO;
     
     [Header("Components")]
     [SerializeField] private ParticleSystem tridentParticle;
@@ -31,7 +34,17 @@ public class TridentBehaviour : MonoBehaviour
     [SerializeField] private bool throwOn;
     [SerializeField] private bool throwOff;
 
-    
+    private void Awake()
+    {
+        #region Singleton
+        if (instance != null)
+        {
+            Debug.LogWarning("There is more than one instance of this singleton !!!");
+            return;
+        }
+        instance = this;
+        #endregion
+    }
 
     private void Start()
     {
@@ -75,7 +88,7 @@ public class TridentBehaviour : MonoBehaviour
             
             fishCaught.Add(other.gameObject); //Add Fish Caught to list
             
-            uiManager.AddScoreFish(fishSO.addScore); //Add OverallScore
+            uiManager.AddScoreFish(clownFishSO.addScore); //Add OverallScore
             uiManager.AddFishCounter(1); //Add FishCounter
         }
         
@@ -86,7 +99,7 @@ public class TridentBehaviour : MonoBehaviour
             
             fishCaught.Add(other.gameObject); //Add Fish Caught to list
             
-            uiManager.AddScoreFish(50); //Add OverallScore
+            uiManager.AddScoreFish(doriSO.addScore); //Add OverallScore
             uiManager.AddFishCounter(1); //Add FishCounter
         }
 
@@ -126,7 +139,7 @@ public class TridentBehaviour : MonoBehaviour
         
     }
 
-    private void TridentThrow()
+    public void TridentThrow()
     {
         throwOff = true;
         throwOn = false;

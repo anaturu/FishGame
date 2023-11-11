@@ -21,12 +21,4 @@ public class SpawnFish : MonoBehaviour
         
     }
 
-    void SpawnShark()
-    {
-        if (uiManager.currentOverallScore >= 100)
-        {
-            Instantiate(shark, Random.insideUnitSphere * 10, Quaternion.identity);
-
-        }
-    }
 }

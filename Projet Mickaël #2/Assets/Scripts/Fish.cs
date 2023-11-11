@@ -18,6 +18,7 @@ public class Fish : MonoBehaviour
     [SerializeField] private BoxCollider fishBc;
     [SerializeField] private Transform spikePos;
     [SerializeField] private GameObject mouthPos;
+    [SerializeField] private GameObject fishBone;
     
     [Header("Booleans")]
     [SerializeField] public bool isHit;
@@ -45,7 +46,7 @@ public class Fish : MonoBehaviour
         
         //Pop Animation
         transform.localScale = Vector3.zero;
-        transform.DOScale(new Vector3(1.5f, 1.5f, 1.5f), 1f).SetEase(Ease.OutBounce);
+        transform.DOScale(new Vector3(4f, 4f, 4f), 1f).SetEase(Ease.OutBounce);
         
         StartCoroutine(FishRandomMovement());
     }
@@ -85,12 +86,18 @@ public class Fish : MonoBehaviour
             StartCoroutine(DisappearFish());
         }
     }
+    
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(gameManager.spawnOffset, gameManager.spawnRange);
+    }
 
     public IEnumerator FishRandomMovement()
     {
-        Vector3 randomPoint = Random.insideUnitSphere * 10;
+        Vector3 randomPoint = Random.insideUnitSphere * gameManager.spawnRange;
+        randomPoint += gameManager.spawnOffset;
 
-        transform.LookAt(randomPoint);
+        transform.DOLookAt(randomPoint, 0.5f);
         fishRb.AddForce((randomPoint - transform.position) * fishSO.moveSpeed, ForceMode.Impulse);
         yield return new WaitForSeconds(Random.Range(1f, 10f));
 
@@ -111,6 +118,7 @@ public class Fish : MonoBehaviour
         transform.DOScale(new Vector3(0f, 0f, 0f), 1f).SetEase(Ease.OutQuad);
         yield return new WaitForSeconds(1f);
 
+        Instantiate(fishBone, transform.position, Quaternion.identity); //Spawn FishBone
         Destroy(gameObject);
         
     }
