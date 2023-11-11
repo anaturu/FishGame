@@ -50,7 +50,7 @@ public class TridentBehaviour : MonoBehaviour
         if (speedVelocity <= 0.3f) //Si trident ne bouge pas
         {
             tridentBc.enabled = false;
-            Debug.Log("TRIDENT NE BOUGE PLUS");
+            //Debug.Log("TRIDENT NE BOUGE PLUS");
         }
         else
         {
@@ -107,12 +107,12 @@ public class TridentBehaviour : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && throwOff)
         {
             StartCoroutine(TridentRecall());
-            Debug.Log("TRIDENT IS BACK");
+            //Debug.Log("TRIDENT IS BACK");
         }
         else if (Input.GetKeyDown(KeyCode.Space) && throwOn)
         {
             TridentThrow();
-            Debug.Log("TRIDENT IS GONE");
+            //Debug.Log("TRIDENT IS GONE");
         }
     }
 

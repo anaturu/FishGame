@@ -280,8 +280,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fishSO: {fileID: 11400000, guid: 3d7fafdbc497200488f99eab17f4b7fd, type: 2}
   fishRb: {fileID: 0}
+  fishBc: {fileID: 0}
   spikePos: {fileID: 0}
+  mouthPos: {fileID: 0}
   isHit: 0
+  isEaten: 0
+  waitBeforeEat: 5
 --- !u!1 &5923624717775138652
 GameObject:
   m_ObjectHideFlags: 0
