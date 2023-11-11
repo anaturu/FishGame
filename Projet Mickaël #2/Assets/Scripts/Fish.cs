@@ -81,6 +81,7 @@ public class Fish : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Shark"))
         {
+            uiManager.AddScoreShark(1);
             StartCoroutine(DisappearFish());
         }
     }

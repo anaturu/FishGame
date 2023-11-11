@@ -9,6 +9,7 @@ public class SharkBehaviour : MonoBehaviour, IDamageable
 {
     [Header("Scripts")]
     private GameManager gameManager;
+    private UIManager uiManager;
     
     [Header("Components")]
     [SerializeField] private Rigidbody sharkRb;
@@ -30,6 +31,7 @@ public class SharkBehaviour : MonoBehaviour, IDamageable
     void Start()
     {
         gameManager = GameManager.instance;
+        uiManager = UIManager.instance;
 
         healthPoint = maxHealth;
 

@@ -13,9 +13,11 @@ public class UIManager : MonoBehaviour
     [Header("Components")]
     [SerializeField] private TextMeshProUGUI fishCounterText;
     [SerializeField] private TextMeshProUGUI scoreText;
+    [SerializeField] private TextMeshProUGUI scoreSharkText;
     
     [Header("Values")]
     [SerializeField] public int currentOverallScore;
+    [SerializeField] public int currentSharkScore;
     [SerializeField] private int currentFishCaught;
     
     private void Awake()
@@ -54,5 +56,17 @@ public class UIManager : MonoBehaviour
             scoreText.DOTMPFontSize(36, 0.1f);
         });
     }
+    public void AddScoreShark(int sharkScore)
+    {
+        currentSharkScore += sharkScore;
+        scoreSharkText.text = currentSharkScore + ""; //Update OverallScore with clownFishScore
+        
+        scoreSharkText.DOTMPFontSize(76, 0.1f).OnComplete(() =>
+        {
+            scoreSharkText.DOTMPFontSize(36, 0.1f);
+        });
+    }
+    
+    
     
 }
