@@ -119,6 +119,7 @@ public class TridentBehaviour : MonoBehaviour
         {
             other.transform.GetComponent<Fish>().isHit = true;
             other.transform.GetComponent<BoxCollider>().enabled = false; //Deactivate fish collider when hit
+            other.transform.DOScale(new Vector3(1, 1, 1), 1f);
             
             fishCaught.Add(other.gameObject); //Add Fish Caught to list
             
@@ -156,6 +157,8 @@ public class TridentBehaviour : MonoBehaviour
         transform.DOMove(tridentPos, callBackTime);
         yield return new WaitForSeconds(callBackTime);
         
+        tridentRb.velocity = Vector3.zero; //Kill velocity
+        
     }
     
     
@@ -190,7 +193,7 @@ public class TridentBehaviour : MonoBehaviour
 
         if (Physics.Raycast(origin, dir.normalized, out hit, maxRange))
         {
-            if (hit.collider.CompareTag("Fish"))
+            if (hit.collider.CompareTag("Fish") || hit.collider.CompareTag("Dori") || hit.collider.CompareTag("Shark") || hit.collider.CompareTag("Blowfish"))
             {
                 mouseWorldPosGizmo.position = origin + dir.normalized * hit.distance;
             }

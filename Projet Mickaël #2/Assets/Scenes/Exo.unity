@@ -812,7 +812,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.8824606, y: 0.85, z: -5.536001}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 4.562, y: 4.562, z: 4.562}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -6054,7 +6054,7 @@ Transform:
   m_GameObject: {fileID: 298670631}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.7284051, z: -0, w: 0.6851467}
-  m_LocalPosition: {x: -380.7, y: -1.3, z: 41.9}
+  m_LocalPosition: {x: -200, y: 0, z: 50}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6338,6 +6338,37 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 543450652728963258}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &369787284
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 369787285}
+  m_Layer: 0
+  m_Name: SharkWaypoint 4
+  m_TagString: Untagged
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &369787285
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 369787284}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.7284051, z: -0, w: 0.6851467}
+  m_LocalPosition: {x: -80, y: 100, z: 54.69311}
+  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &393318238 stripped
 Transform:
@@ -6913,6 +6944,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 600131298}
   m_CullTransparentMesh: 1
+--- !u!1 &621126587
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 621126588}
+  m_Layer: 0
+  m_Name: SharkWaypoint 2
+  m_TagString: Untagged
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &621126588
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 621126587}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.7284051, z: -0, w: 0.6851467}
+  m_LocalPosition: {x: 200, y: 87.7, z: 50}
+  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &644151011
 GameObject:
   m_ObjectHideFlags: 0
@@ -13276,6 +13338,37 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 96de329b110efab49a5a1329985835cb, type: 3}
+--- !u!1 &1219721935
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1219721936}
+  m_Layer: 0
+  m_Name: SharkWaypoint 3
+  m_TagString: Untagged
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1219721936
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1219721935}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.7284051, z: -0, w: 0.6851467}
+  m_LocalPosition: {x: 0, y: 100, z: 50}
+  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1238010364
 GameObject:
   m_ObjectHideFlags: 0
@@ -14249,6 +14342,37 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f987858f347ba1243bb5f1bd89e4208c, type: 3}
+--- !u!1 &1593071437
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1593071438}
+  m_Layer: 0
+  m_Name: SharkWaypoint 5
+  m_TagString: Untagged
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1593071438
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1593071437}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.7284051, z: -0, w: 0.6851467}
+  m_LocalPosition: {x: 80, y: 100, z: 54.69311}
+  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1602341386 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 0823e976efb5ea445bd7c26d264615ea,
@@ -19426,7 +19550,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Money :'
+  m_text: 'Score :'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 73e5306172548744cb83531c1546d332, type: 2}
   m_sharedMaterial: {fileID: -8323179528317989871, guid: 73e5306172548744cb83531c1546d332,
@@ -26864,7 +26988,7 @@ Transform:
   m_GameObject: {fileID: 156318359868984143}
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0.3, z: -18}
+  m_LocalPosition: {x: 2.7, y: 0.2, z: -16.88}
   m_LocalScale: {x: 5.664714, y: 5.664714, z: 5.664714}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -27215,12 +27339,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sharkRb: {fileID: 0}
   sharkAnimator: {fileID: 0}
-  waypoint: {fileID: 298670631}
+  waypoints:
+  - {fileID: 298670631}
+  - {fileID: 621126587}
+  - {fileID: 1219721935}
+  - {fileID: 369787284}
+  - {fileID: 1593071437}
   healthPoint: 0
-  maxHealth: 80
+  maxHealth: 20
   cooldownAttack: 2
   cooldownComeback: 5
-  scaredMovementSpeed: 0.4
+  scaredMovementSpeed: 3
   moveSpeed: 1.7
   isScared: 0
 --- !u!65 &6528508882555383516
@@ -27699,7 +27828,7 @@ GameObject:
   - component: {fileID: 7336707487940775883}
   m_Layer: 0
   m_Name: SharkMesh
-  m_TagString: Untagged
+  m_TagString: Shark
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -28284,6 +28413,10 @@ SceneRoots:
   m_Roots:
   - {fileID: 1429721404}
   - {fileID: 298670632}
+  - {fileID: 621126588}
+  - {fileID: 1219721936}
+  - {fileID: 369787285}
+  - {fileID: 1593071438}
   - {fileID: 52663653}
   - {fileID: 403641697}
   - {fileID: 410087041}

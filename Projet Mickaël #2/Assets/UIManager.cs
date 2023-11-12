@@ -53,7 +53,7 @@ public class UIManager : MonoBehaviour
         
         overallScoreText.DOTMPFontSize(150, 0.1f).OnComplete(() =>
         {
-            overallScoreText.DOTMPFontSize(100, 0.1f);
+            overallScoreText.DOTMPFontSize(70, 0.1f);
         });
     }
     public void AddScoreShark(int sharkScore)
