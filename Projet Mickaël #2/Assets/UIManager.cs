@@ -41,9 +41,9 @@ public class UIManager : MonoBehaviour
         currentFishCaught += fishCaught;
         fishCounterText.text = currentFishCaught + ""; //Update FishCounter
         
-        fishCounterText.DOTMPFontSize(150, 0.2f).OnComplete(() =>
+        fishCounterText.DOTMPFontSize(200, 0.2f).OnComplete(() =>
         {
-            fishCounterText.DOTMPFontSize(100, 0.1f);
+            fishCounterText.DOTMPFontSize(70, 0.1f);
         });
     }
     public void AddScoreFish(int clownFishScore)
@@ -51,7 +51,7 @@ public class UIManager : MonoBehaviour
         currentOverallScore += clownFishScore;
         overallScoreText.text = currentOverallScore + ""; //Update OverallScore with clownFishScore
         
-        overallScoreText.DOTMPFontSize(150, 0.1f).OnComplete(() =>
+        overallScoreText.DOTMPFontSize(200, 0.1f).OnComplete(() =>
         {
             overallScoreText.DOTMPFontSize(70, 0.1f);
         });
@@ -61,7 +61,7 @@ public class UIManager : MonoBehaviour
         currentSharkScore += sharkScore;
         scoreSharkText.text = currentSharkScore + ""; //Update OverallScore with clownFishScore
         
-        scoreSharkText.DOTMPFontSize(100, 0.1f).OnComplete(() =>
+        scoreSharkText.DOTMPFontSize(200, 0.3f).OnComplete(() =>
         {
             scoreSharkText.DOTMPFontSize(70, 0.1f);
         });
@@ -72,7 +72,7 @@ public class UIManager : MonoBehaviour
         currentOverallScore -= penaltyScore;
         overallScoreText.text = currentOverallScore + "";
 
-        overallScoreText.DOTMPFontSize(100, 0.2f).OnComplete(() =>
+        overallScoreText.DOTMPFontSize(200, 0.2f).OnComplete(() =>
         {
             overallScoreText.DOTMPFontSize(70, 0.1f);
         });

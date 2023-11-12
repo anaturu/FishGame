@@ -19,6 +19,9 @@ public class TridentBehaviour : MonoBehaviour
     [SerializeField] private ParticleSystem tridentParticle;
     [SerializeField] private ParticleSystem tridentParticleFollow;
     [SerializeField] private GameObject mouseGizmo;
+    [SerializeField] public Transform[] spikePos;
+    [SerializeField] public Transform[] bucketPos;
+    [SerializeField] public Transform[] sharkBucketPos;
     private Rigidbody tridentRb;
     private BoxCollider tridentBc;
     private Vector3 tridentPos;
@@ -90,7 +93,7 @@ public class TridentBehaviour : MonoBehaviour
         
         TridentLogic();
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && throwOn)
         {
             TridentThrow();
         }
@@ -101,25 +104,41 @@ public class TridentBehaviour : MonoBehaviour
         ThrowRaycast();
     }
 
-    private void OnTriggerEnter(Collider other)
+    private IEnumerator OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Fish")) //Si l'objet touché est un clownfish
         {
             other.transform.GetComponent<Fish>().isHit = true;
             other.transform.GetComponent<BoxCollider>().enabled = false; //Deactivate fish collider when hit
-            other.transform.DOScale(new Vector3(1, 1, 1), 1f);
+            other.transform.DOScale(new Vector3(0.8f, 0.8f, 0.8f), 0.3f);
             
             fishCaught.Add(other.gameObject); //Add Fish Caught to list
             
             uiManager.AddScoreFish(clownFishSO.addScore); //Add OverallScore
             uiManager.AddFishCounter(1); //Add FishCounter
+            yield return new WaitForSeconds(2f);
+            
+            other.transform.DOScale(Vector3.zero, 0.3f);
+            other.transform.GetComponent<Fish>().isHit = false;
+            //other.transform.GetComponent<BoxCollider>().enabled = true;
+            //other.transform.GetComponent<BoxCollider>().isTrigger = false;
+            other.transform.GetComponent<CapsuleCollider>().enabled = true;
+            yield return new WaitForSeconds(0.3f);
+            
+            other.transform.GetComponent<Fish>().isInBucket = true;
+            other.transform.GetComponent<Fish>().enabled = false;
+            other.transform.GetComponent<Rigidbody>().useGravity = true;
+            other.transform.DOMove(bucketPos[Random.Range(0, bucketPos.Length)].position, 0.3f);
+            yield return new WaitForSeconds(0.3f);
+            
+            other.transform.DOScale(new Vector3(4f, 4f, 4f), 0.3f);
         }
         
         if (other.gameObject.CompareTag("Dori")) //Si l'objet touché est un Dori
         {
             other.transform.GetComponent<Fish>().isHit = true;
             other.transform.GetComponent<BoxCollider>().enabled = false; //Deactivate fish collider when hit
-            other.transform.DOScale(new Vector3(1, 1, 1), 1f);
+            other.transform.DOScale(new Vector3(0.8f, 0.8f, 0.8f), 0.3f);
             
             fishCaught.Add(other.gameObject); //Add Fish Caught to list
             
@@ -151,14 +170,13 @@ public class TridentBehaviour : MonoBehaviour
 
     IEnumerator TridentRecall()
     {
-        throwOn = true;
         throwOff = false;
         
         transform.DOMove(tridentPos, callBackTime);
         yield return new WaitForSeconds(callBackTime);
         
         tridentRb.velocity = Vector3.zero; //Kill velocity
-        
+        throwOn = true;
     }
     
     
@@ -203,5 +221,6 @@ public class TridentBehaviour : MonoBehaviour
             hit.point = origin + dir.normalized * maxRange;
         }
     }
+
     
 }

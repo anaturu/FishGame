@@ -14,6 +14,8 @@ public class SharkBehaviour : MonoBehaviour, IDamageable
     [Header("Components")]
     [SerializeField] private Rigidbody sharkRb;
     [SerializeField] private Animator sharkAnimator;
+    [SerializeField] private ParticleSystem bloodParticle;
+    [SerializeField] private ParticleSystem trailBloodParticle;
     [SerializeField] private GameObject[] waypoints;
     
     [Header("Values")]
@@ -61,7 +63,6 @@ public class SharkBehaviour : MonoBehaviour, IDamageable
         if (healthPoint <= 0)//Death
         {
             Vector3 escapePos = waypoints[Random.Range(0, waypoints.Length)].transform.position;
-            Debug.Log(escapePos);
             transform.DOLookAt(escapePos, 1.5f);
             sharkRb.DOMove(escapePos, scaredMovementSpeed).SetEase(Ease.Linear);
 
@@ -97,6 +98,8 @@ public class SharkBehaviour : MonoBehaviour, IDamageable
     public void TakeDamage(int damage)
     {
         healthPoint -= damage;
+        bloodParticle.Play();
+        trailBloodParticle.Play();
         Debug.Log("TOOK SOME DAMAGE");
         
     }

@@ -7,7 +7,8 @@ using Random = UnityEngine.Random;
 
 public class Fish : MonoBehaviour
 {
-    [Header("Scripts")]
+    [Header("Scripts")] 
+    private TridentBehaviour tridentManager;
     private UIManager uiManager;
     private GameManager gameManager;
     [SerializeField] private FishSO fishSO;
@@ -15,16 +16,18 @@ public class Fish : MonoBehaviour
     [Header("Components")]
     [SerializeField] private Animator fishAnimator;
     [SerializeField] private Rigidbody fishRb;
+    [SerializeField] private CapsuleCollider fishCapsuleCollider;
     [SerializeField] private BoxCollider fishBc;
-    [SerializeField] private Transform spikePos;
     [SerializeField] private GameObject mouthPos;
     [SerializeField] private GameObject fishBone;
     
     [Header("Booleans")]
     [SerializeField] public bool isHit;
     [SerializeField] public bool isEaten;
-    
-    [Header("Values")]
+    [SerializeField] public bool isInBucket;
+
+    [Header("Values")] 
+    private int randomIndex;
     [SerializeField] private float waitBeforeEat;
     private float speedVelocity;
 
@@ -32,15 +35,19 @@ public class Fish : MonoBehaviour
     
     private void Start()
     {
+        tridentManager = TridentBehaviour.instance;
         uiManager = UIManager.instance;
         gameManager = GameManager.instance;
         fishRb = GetComponent<Rigidbody>();
         fishBc = GetComponent<BoxCollider>();
+        fishCapsuleCollider = GetComponent<CapsuleCollider>();
         fishAnimator = GetComponent<Animator>();
-        spikePos = GameObject.Find("Dent1").transform;
         mouthPos = GameObject.Find("Shark").transform.GetChild(2).gameObject;
 
+        randomIndex = Random.Range(0, tridentManager.spikePos.Length);
+
         isEaten = false;
+        isInBucket = false;
         
         GameManager.instance.fishes.Add(gameObject); //Add to the list every fishes
         
@@ -55,7 +62,7 @@ public class Fish : MonoBehaviour
     {
         speedVelocity = fishRb.velocity.magnitude; //Check trident speedVelocity
         
-        if (speedVelocity <= 0.2f) //Si shark ne bouge pas
+        if (speedVelocity <= 0.2f && fishAnimator != null) //Si shark ne bouge pas
         {
             fishAnimator.SetBool("isSwimming", false);
         }
@@ -67,7 +74,8 @@ public class Fish : MonoBehaviour
         if (isHit)
         {
             StopCoroutine(FishRandomMovement());
-            transform.position = spikePos.position;
+            transform.position = tridentManager.spikePos[randomIndex].position;
+            Debug.Log(randomIndex);
             
             GameManager.instance.fishes.Remove(gameObject); //Remove Fish de la liste
         }
@@ -75,6 +83,12 @@ public class Fish : MonoBehaviour
         if (isEaten)
         {
             transform.position = mouthPos.transform.position;
+        }
+
+        if (isInBucket)
+        {
+            fishRb.velocity = Vector3.zero;
+            StopCoroutine(FishRandomMovement());
         }
     }
     
@@ -94,6 +108,7 @@ public class Fish : MonoBehaviour
 
     public IEnumerator FishRandomMovement()
     {
+        Debug.Log("POURQUOI TU TE DESAC PAS ??!");
         Vector3 randomPoint = Random.insideUnitSphere * gameManager.spawnRange;
         randomPoint += gameManager.spawnOffset;
 
@@ -101,7 +116,7 @@ public class Fish : MonoBehaviour
         fishRb.AddForce((randomPoint - transform.position) * fishSO.moveSpeed, ForceMode.Impulse);
         yield return new WaitForSeconds(Random.Range(1f, 10f));
 
-        if (!isHit)
+        if (!isHit && !isInBucket)
         {
             StartCoroutine(FishRandomMovement());
         }
@@ -118,8 +133,17 @@ public class Fish : MonoBehaviour
         transform.DOScale(new Vector3(0f, 0f, 0f), 1f).SetEase(Ease.OutQuad);
         yield return new WaitForSeconds(1f);
 
+        isEaten = false;
+        isInBucket = true;
         Instantiate(fishBone, transform.position, Quaternion.identity); //Spawn FishBone
-        Destroy(gameObject);
-        
+        transform.DOMove(tridentManager.sharkBucketPos[Random.Range(0, tridentManager.sharkBucketPos.Length)].position, 0.3f);
+        fishRb.velocity = Vector3.zero;
+        fishRb.useGravity = true;
+        fishCapsuleCollider.enabled = true;
+        yield return new WaitForSeconds(0.3f);
+
+        transform.DOScale(new Vector3(4f, 4f, 4f), 1f).SetEase(Ease.OutQuad);
+        transform.GetComponent<Fish>().enabled = false;
+
     }
 }

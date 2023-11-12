@@ -64,7 +64,7 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < numberOfNemo; i++)
         {
             Instantiate(clownFish, Random.insideUnitSphere * spawnRange + spawnOffset, Quaternion.identity);
-            yield return new WaitForSeconds(0.2f);
+            yield return new WaitForSeconds(0.1f);
         }
         
         

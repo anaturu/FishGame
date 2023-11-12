@@ -267,8 +267,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1.0510063, z: 1.5963287}
-  m_Center: {x: 0, y: 0.025503159, z: -0.29816437}
+  m_Size: {x: 0.27157784, y: 1.0510063, z: 1.5963287}
+  m_Center: {x: 0.0030107498, y: 0.025503159, z: -0.29816437}
 --- !u!54 &6255444701863713461
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -312,12 +312,12 @@ MonoBehaviour:
   fishAnimator: {fileID: 0}
   fishRb: {fileID: 0}
   fishBc: {fileID: 0}
-  spikePos: {fileID: 0}
   mouthPos: {fileID: 0}
   fishBone: {fileID: 2040189368847298977, guid: 3588fbea8b7c1bd44ad0f8a0825c5694,
     type: 3}
   isHit: 0
   isEaten: 0
+  isInBucket: 0
   waitBeforeEat: 2
 --- !u!1 &4626057899419940193
 GameObject:
