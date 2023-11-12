@@ -203,6 +203,7 @@ GameObject:
   - component: {fileID: 4550413805225613382}
   - component: {fileID: 6255444701863713461}
   - component: {fileID: 3880357853743712627}
+  - component: {fileID: 4392806159461888740}
   m_Layer: 0
   m_Name: Dori
   m_TagString: Dori
@@ -311,6 +312,7 @@ MonoBehaviour:
   fishSO: {fileID: 11400000, guid: 4e9b8504c073a7f42bec2c1595c0e3b5, type: 2}
   fishAnimator: {fileID: 0}
   fishRb: {fileID: 0}
+  fishCapsuleCollider: {fileID: 0}
   fishBc: {fileID: 0}
   mouthPos: {fileID: 0}
   fishBone: {fileID: 2040189368847298977, guid: 3588fbea8b7c1bd44ad0f8a0825c5694,
@@ -319,6 +321,29 @@ MonoBehaviour:
   isEaten: 0
   isInBucket: 0
   waitBeforeEat: 2
+--- !u!136 &4392806159461888740
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4318797316932603862}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 1.78
+  m_Direction: 2
+  m_Center: {x: 0, y: 0, z: -0.32}
 --- !u!1 &4626057899419940193
 GameObject:
   m_ObjectHideFlags: 0

@@ -176,7 +176,7 @@ public class TridentBehaviour : MonoBehaviour
 
     void TridentLogic()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && throwOff)
+        if (Input.GetMouseButtonDown(1) && throwOff)
         {
             StartCoroutine(TridentRecall());
             //Debug.Log("TRIDENT IS BACK");
