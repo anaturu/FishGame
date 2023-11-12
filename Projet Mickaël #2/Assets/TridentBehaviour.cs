@@ -144,6 +144,22 @@ public class TridentBehaviour : MonoBehaviour
             
             uiManager.AddScoreFish(doriSO.addScore); //Add OverallScore
             uiManager.AddFishCounter(1); //Add FishCounter
+            yield return new WaitForSeconds(2f);
+            
+            other.transform.DOScale(Vector3.zero, 0.3f);
+            other.transform.GetComponent<Fish>().isHit = false;
+            //other.transform.GetComponent<BoxCollider>().enabled = true;
+            //other.transform.GetComponent<BoxCollider>().isTrigger = false;
+            other.transform.GetComponent<CapsuleCollider>().enabled = true;
+            yield return new WaitForSeconds(0.3f);
+            
+            other.transform.GetComponent<Fish>().isInBucket = true;
+            other.transform.GetComponent<Fish>().enabled = false;
+            other.transform.GetComponent<Rigidbody>().useGravity = true;
+            other.transform.DOMove(bucketPos[Random.Range(0, bucketPos.Length)].position, 0.3f);
+            yield return new WaitForSeconds(0.3f);
+            
+            other.transform.DOScale(new Vector3(4f, 4f, 4f), 0.3f);
         }
 
         
