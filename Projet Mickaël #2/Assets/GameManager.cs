@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour
@@ -12,6 +13,7 @@ public class GameManager : MonoBehaviour
     
     [Header("Components")]
     public Camera cam;
+    public Image backgroundImage;
     public GameObject clownFish;
     public GameObject dori;
     public Transform camPosStart;
@@ -26,6 +28,7 @@ public class GameManager : MonoBehaviour
     public int numberOfNemo;
     public int numberOfDori;
     public int timeBeforeSecondWave;
+    public int timeBeforeThirdWave;
     public int shakeVibrato;
     public float spawnRange;
 
@@ -54,29 +57,39 @@ public class GameManager : MonoBehaviour
     {
         if (fishes.Count == 0) //When all fishes are caught/dead
         {
-            StartCoroutine(SecondWave());
+            
         }
     }
 
-    IEnumerator FirstWave()
+    public IEnumerator FirstWave()
     {
         //1st wave
         for (int i = 0; i < numberOfNemo; i++)
         {
+            yield return new WaitForSeconds(0.2f);
+
             Instantiate(clownFish, Random.insideUnitSphere * spawnRange + spawnOffset, Quaternion.identity);
-            yield return new WaitForSeconds(0.1f);
         }
         
-        
-    }
-
-    IEnumerator SecondWave()
-    {
+        yield return new WaitForSeconds(timeBeforeSecondWave);
         
         for (int i = 0; i < numberOfDori; i++)
         {
-            Instantiate(dori, Random.insideUnitSphere * spawnRange + spawnOffset, Quaternion.identity);
             yield return new WaitForSeconds(0.2f);
+            
+            Instantiate(dori, Random.insideUnitSphere * spawnRange + spawnOffset, Quaternion.identity);
+
+        }
+        
+        yield return new WaitForSeconds(timeBeforeThirdWave);
+
+
+        for (int i = 0; i < numberOfDori; i++)
+        {
+            yield return new WaitForSeconds(0.2f);
+            
+            Instantiate(clownFish, Random.insideUnitSphere * spawnRange + spawnOffset, Quaternion.identity);
+            Instantiate(dori, Random.insideUnitSphere * spawnRange + spawnOffset, Quaternion.identity);
 
         }
     }

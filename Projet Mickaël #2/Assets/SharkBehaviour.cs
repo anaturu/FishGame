@@ -83,7 +83,8 @@ public class SharkBehaviour : MonoBehaviour, IDamageable
             yield return new WaitForSeconds(cooldownComeback);
             isScared = false;
         }
-        
+        yield return new WaitForSeconds(3f);
+
         Vector3 nextFishPos = gameManager.fishes[Random.Range(0, gameManager.fishes.Count - 1)].transform.position - transform.position;
         transform.DOLookAt(nextFishPos, 0.5f);
         sharkRb.AddForce(nextFishPos * moveSpeed, ForceMode.VelocityChange);

@@ -20,6 +20,8 @@ public class Fish : MonoBehaviour
     [SerializeField] private BoxCollider fishBc;
     [SerializeField] private GameObject mouthPos;
     [SerializeField] private GameObject fishBone;
+    [SerializeField] private ParticleSystem trailEatBloodParticle;
+
     
     [Header("Booleans")]
     [SerializeField] public bool isHit;
@@ -53,7 +55,7 @@ public class Fish : MonoBehaviour
         
         //Pop Animation
         transform.localScale = Vector3.zero;
-        transform.DOScale(new Vector3(4f, 4f, 4f), 1f).SetEase(Ease.OutBounce);
+        transform.DOScale(new Vector3(4f, 4f, 4f), 0.5f).SetEase(Ease.OutBounce);
         
         StartCoroutine(FishRandomMovement());
     }
@@ -108,7 +110,6 @@ public class Fish : MonoBehaviour
 
     public IEnumerator FishRandomMovement()
     {
-        Debug.Log("POURQUOI TU TE DESAC PAS ??!");
         Vector3 randomPoint = Random.insideUnitSphere * gameManager.spawnRange;
         randomPoint += gameManager.spawnOffset;
 
@@ -128,6 +129,7 @@ public class Fish : MonoBehaviour
         fishBc.enabled = false;
             
         GameManager.instance.fishes.Remove(gameObject); //Remove Fish de la liste
+        trailEatBloodParticle.Play();
         yield return new WaitForSeconds(waitBeforeEat);
         
         transform.DOScale(new Vector3(0f, 0f, 0f), 1f).SetEase(Ease.OutQuad);
