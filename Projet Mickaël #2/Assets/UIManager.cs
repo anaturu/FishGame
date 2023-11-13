@@ -113,7 +113,6 @@ public class UIManager : MonoBehaviour
             });
             
             //Disappear All Fish)]
-            Debug.Log("????????????");
         }
         yield return new WaitForSeconds(2f);
 

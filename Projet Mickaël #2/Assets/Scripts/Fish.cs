@@ -72,7 +72,6 @@ public class Fish : MonoBehaviour
         if (isHit)
         {
             transform.position = tridentManager.spikePos[randomIndex].position;
-            Debug.Log(randomIndex);
             
             GameManager.instance.fishes.Remove(gameObject); //Remove Fish de la liste
         }

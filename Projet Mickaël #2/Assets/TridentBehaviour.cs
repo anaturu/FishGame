@@ -108,21 +108,19 @@ public class TridentBehaviour : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Fish")) //Si l'objet touché est un clownfish
         {
+            other.transform.DOScale(new Vector3(0.8f, 0.8f, 0.8f), 0.3f);
+
             other.transform.GetComponent<Fish>().isHit = true;
             other.transform.GetComponent<BoxCollider>().enabled = false; //Deactivate fish collider when hit
-            other.transform.DOScale(new Vector3(0.8f, 0.8f, 0.8f), 0.3f);
             
             uiManager.AddScoreFish(clownFishSO.addScore); //Add OverallScore
             uiManager.AddFishCounter(1); //Add FishCounter
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(5f);
             
             other.transform.DOScale(Vector3.zero, 0.3f);
             yield return new WaitForSeconds(0.3f);
             
-            Instantiate(deadNemo, sharkBucketPos[Random.Range(0, sharkBucketPos.Length)].position, Quaternion.identity);
-            yield return new WaitForSeconds(0.3f);
-            
-            other.transform.DOScale(new Vector3(4f, 4f, 4f), 0.3f);
+            Instantiate(deadNemo, bucketPos[Random.Range(0, bucketPos.Length)].position, Quaternion.identity);
         }
         
         if (other.gameObject.CompareTag("Dori")) //Si l'objet touché est un Dori
@@ -133,7 +131,7 @@ public class TridentBehaviour : MonoBehaviour
             
             uiManager.AddScoreFish(doriSO.addScore); //Add OverallScore
             uiManager.AddFishCounter(1); //Add FishCounter
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(5f);
             
             other.transform.DOScale(Vector3.zero, 0.3f);
             other.transform.GetComponent<Fish>().isHit = false;
@@ -142,8 +140,7 @@ public class TridentBehaviour : MonoBehaviour
             other.transform.GetComponent<CapsuleCollider>().enabled = true;
             yield return new WaitForSeconds(0.3f);
             
-            
-            Instantiate(deadDori, sharkBucketPos[Random.Range(0, sharkBucketPos.Length)].position, Quaternion.identity);
+            Instantiate(deadDori, bucketPos[Random.Range(0, bucketPos.Length)].position, Quaternion.identity);
             yield return new WaitForSeconds(0.3f);
         }
 
