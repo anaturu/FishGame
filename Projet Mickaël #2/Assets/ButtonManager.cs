@@ -59,6 +59,7 @@ public class ButtonManager : MonoBehaviour
    {
       pauseMenu.SetActive(false); //Désactive Menu Pause
       Time.timeScale = 1f;
+      Cursor.visible = false;
 
       isPaused = false;
    }
@@ -85,6 +86,8 @@ public class ButtonManager : MonoBehaviour
    public void ButtonMainMenu()
    {
       Time.timeScale = 1f;
+      Cursor.visible = true;
+
       SceneManager.LoadScene("MainMenu");
    }
    public void ButtonPlayAgain()
@@ -102,6 +105,7 @@ public class ButtonManager : MonoBehaviour
    
    public void OptionsButton()
    {
+      
       Debug.Log("MENUS IS OPEN");
    }
    

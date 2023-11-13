@@ -24,11 +24,14 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI endText;
     [SerializeField] private TextMeshProUGUI winText;
     [SerializeField] private TextMeshProUGUI loseText;
+    [SerializeField] private TextMeshProUGUI sharkScoreEndGame;
+    [SerializeField] private TextMeshProUGUI playerScoreEndGame;
     [SerializeField] private GameObject playerBucket;
     [SerializeField] private GameObject sharkBucket;
     [SerializeField] private GameObject shark;
     [SerializeField] private GameObject inGameUI;
     [SerializeField] private GameObject endMenu;
+    [SerializeField] private GameObject mouseGizmoRedBall;
 
 
     [Header("Values")] 
@@ -87,6 +90,11 @@ public class UIManager : MonoBehaviour
 
     private IEnumerator TimerEnded()
     {
+        //EndText
+        endText.DOTMPFontSize(150, 2f).SetEase(Ease.InElastic).OnComplete(() =>
+        {
+            endText.DOTMPFontSize(0, 2f).SetEase(Ease.InElastic);
+        });
         Debug.Log("TIMER HAS ENDED");
         yield return new WaitForSeconds(1f);
         timeRemaining = 0;
@@ -120,23 +128,44 @@ public class UIManager : MonoBehaviour
                 fish.SetActive(false);
             });
         }
+
+        mouseGizmoRedBall.transform.DOScale(Vector3.zero, 1f).SetEase(Ease.InElastic);
         yield return new WaitForSeconds(2f);
 
         //Cam
         gameManager.cam.transform.DOMove(new Vector3(distanceEndCam, 1, -20), timeDecalCamera).SetEase(Ease.Linear);
         
-        endText.DOTMPFontSize(150, 1f).OnComplete(() =>
-        {
-            endText.DOTMPFontSize(0, 5f);
-        });
         yield return new WaitForSeconds(timeDecalCamera);
         
+        yield return new WaitForSeconds(2f);
+
+        
         //Bucket
-        playerBucket.transform.DORotate(new Vector3(-280, 0, 90), timeEmptyBucket).SetEase(Ease.InOutExpo);
+        playerBucket.transform.DOScale(Vector3.zero, timeEmptyBucket);
         yield return new WaitForSeconds(timeEmptyBucket);
 
-        sharkBucket.transform.DORotate(new Vector3(-280, 0, 90), timeEmptyBucket).SetEase(Ease.InOutExpo);
+        playerScoreEndGame.text = "x" + currentFishCaught;
+
+        playerScoreEndGame.DOTMPFontSize(200, 0.5f).OnComplete(() =>
+        {
+            playerScoreEndGame.DOTMPFontSize(100, 0.1f);
+        });
+        yield return new WaitForSeconds(2f);
+
+
+        sharkBucket.transform.transform.DOScale(Vector3.zero, timeEmptyBucket);
         yield return new WaitForSeconds(timeEmptyBucket);
+        
+        sharkScoreEndGame.text = "x" + currentSharkScore;
+
+        sharkScoreEndGame.DOTMPFontSize(200, 0.5f).OnComplete(() =>
+        {
+            sharkScoreEndGame.DOTMPFontSize(100, 0.1f);
+        });
+        yield return new WaitForSeconds(2f);
+
+        sharkScoreEndGame.enabled = false;
+        playerScoreEndGame.enabled = false;
 
         if (currentFishCaught >= currentSharkScore) //Si player a plus de poissons que le requin
         {

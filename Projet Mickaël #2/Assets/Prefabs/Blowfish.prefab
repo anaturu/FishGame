@@ -98,8 +98,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97b29718098afd14d84dddd514a3aedf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathSize: 3
-  powerCooldown: 5
+  backgroundImage: {fileID: 0}
+  deathSize: 2
+  powerCooldown: 7
+  powerUpText: {fileID: 0}
 --- !u!135 &8186737739905307063
 SphereCollider:
   m_ObjectHideFlags: 0

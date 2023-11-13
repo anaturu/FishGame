@@ -50,6 +50,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         StartCoroutine(SpawnBlobFish());
+        Cursor.visible = false;
     }
 
     private void Update()
@@ -95,9 +96,10 @@ public class GameManager : MonoBehaviour
     
     IEnumerator SpawnBlobFish()
     {
+        yield return new WaitForSeconds(5);
 
         Instantiate(blobFish, spawnPosBlobFish[Random.Range(0, spawnPosBlobFish.Length)]);
-        yield return new WaitForSeconds(30);
+        yield return new WaitForSeconds(15);
 
         StartCoroutine(SpawnBlobFish());
 

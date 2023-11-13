@@ -11,6 +11,7 @@ public class BlowfishBehaviour : MonoBehaviour
 {
     
     private UIManager uiManager;
+    private GameManager gameManager;
     private TridentBehaviour tridentManager;
     
     public SpriteRenderer backgroundImage;
@@ -23,16 +24,23 @@ public class BlowfishBehaviour : MonoBehaviour
     {
         tridentManager = TridentBehaviour.instance;
         uiManager = UIManager.instance;
+        gameManager = GameManager.instance;
+
 
         backgroundImage = GameObject.Find("Gradient").GetComponent<SpriteRenderer>();
         powerUpText = GameObject.Find("PowerUpText").GetComponent<TextMeshProUGUI>();
+        
+        GameManager.instance.fishes.Add(gameObject); //Add to the list every fishes
+
     }
 
     private IEnumerator OnCollisionEnter(Collision other)
     {
         if (other.gameObject.CompareTag("Trident"))
         {
-            backgroundImage.DOColor(Color.red, 1f);
+            backgroundImage.DOColor(Color.yellow, 1f);
+            gameManager.LightScreenShake();
+
             powerUpText.DOTMPFontSize(50f, 3f).SetEase(Ease.OutElastic);
             
             transform.DOScale(Vector3.one * deathSize, 0.5f).SetEase(Ease.OutBounce).OnComplete(() =>
