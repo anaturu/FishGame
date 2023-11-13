@@ -89,8 +89,13 @@ public class Fish : MonoBehaviour
 
         if (isInBucket)
         {
+            GameManager.instance.fishesInBucket.Add(gameObject); //Add to the list every fishes IN BUCKET
+            Debug.Log("ADD FISH TO SHARK BUCKET");
+
             fishRb.velocity = Vector3.zero;
+            fishRb.drag = 0;
             StopCoroutine(FishRandomMovement());
+            isInBucket = false; //flag
         }
     }
     
@@ -115,10 +120,11 @@ public class Fish : MonoBehaviour
 
         transform.DOLookAt(randomPoint, 0.5f);
         fishRb.AddForce((randomPoint - transform.position) * fishSO.moveSpeed, ForceMode.Impulse);
-        yield return new WaitForSeconds(Random.Range(1f, 10f));
 
-        if (!isHit && !isInBucket)
+        if (!isHit || !isInBucket)
         {
+            yield return new WaitForSeconds(Random.Range(1f, 10f));
+            Debug.Log(gameObject.name + ": FISH MOVES");
             StartCoroutine(FishRandomMovement());
         }
     }

@@ -13,7 +13,6 @@ public class GameManager : MonoBehaviour
     
     [Header("Components")]
     public Camera cam;
-    public Image backgroundImage;
     public GameObject clownFish;
     public GameObject dori;
     public Transform camPosStart;
@@ -23,15 +22,15 @@ public class GameManager : MonoBehaviour
 
     
     public List<GameObject> fishes; //List of every fishes in the game
+    public List<GameObject> fishesInBucket; //List of every fishes IN BUCKET in the game
 
     [Header("Values")]
-    public int numberOfNemo;
-    public int numberOfDori;
+    public int numberOfClownFish;
+    public int numberOfDoriFish;
     public int timeBeforeSecondWave;
     public int timeBeforeThirdWave;
     public int shakeVibrato;
     public float spawnRange;
-
     
 
     private void Awake()
@@ -64,7 +63,7 @@ public class GameManager : MonoBehaviour
     public IEnumerator FirstWave()
     {
         //1st wave
-        for (int i = 0; i < numberOfNemo; i++)
+        for (int i = 0; i < numberOfClownFish; i++)
         {
             yield return new WaitForSeconds(0.2f);
 
@@ -73,7 +72,7 @@ public class GameManager : MonoBehaviour
         
         yield return new WaitForSeconds(timeBeforeSecondWave);
         
-        for (int i = 0; i < numberOfDori; i++)
+        for (int i = 0; i < numberOfDoriFish; i++)
         {
             yield return new WaitForSeconds(0.2f);
             
@@ -82,9 +81,8 @@ public class GameManager : MonoBehaviour
         }
         
         yield return new WaitForSeconds(timeBeforeThirdWave);
-
-
-        for (int i = 0; i < numberOfDori; i++)
+        
+        for (int i = 0; i < numberOfDoriFish; i++)
         {
             yield return new WaitForSeconds(0.2f);
             
@@ -92,6 +90,7 @@ public class GameManager : MonoBehaviour
             Instantiate(dori, Random.insideUnitSphere * spawnRange + spawnOffset, Quaternion.identity);
 
         }
+        
     }
     
     IEnumerator SpawnBlobFish()

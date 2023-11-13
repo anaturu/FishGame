@@ -30,7 +30,7 @@ public class TridentBehaviour : MonoBehaviour
     
     [Header("Values")]
     [SerializeField] private float explosionPower;
-    [SerializeField] private float callBackTime;
+    [SerializeField] public float callBackTime;
     private float speedVelocity;
     
     [Header("Booleans")]
@@ -126,8 +126,10 @@ public class TridentBehaviour : MonoBehaviour
             yield return new WaitForSeconds(0.3f);
             
             other.transform.GetComponent<Fish>().isInBucket = true;
+            gameManager.fishesInBucket.Add(other.gameObject);
             other.transform.GetComponent<Fish>().enabled = false;
             other.transform.GetComponent<Rigidbody>().useGravity = true;
+            other.transform.GetComponent<Rigidbody>().drag = 0;
             other.transform.DOMove(bucketPos[Random.Range(0, bucketPos.Length)].position, 0.3f);
             yield return new WaitForSeconds(0.3f);
             

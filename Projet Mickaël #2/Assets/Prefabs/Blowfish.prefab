@@ -99,6 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathSize: 3
+  powerCooldown: 5
 --- !u!135 &8186737739905307063
 SphereCollider:
   m_ObjectHideFlags: 0
