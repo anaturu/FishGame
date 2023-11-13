@@ -21,6 +21,8 @@ public class Fish : MonoBehaviour
     [SerializeField] private GameObject mouthPos;
     [SerializeField] private GameObject fishBone;
     [SerializeField] private ParticleSystem trailEatBloodParticle;
+    [SerializeField] private GameObject deadNemo;
+    [SerializeField] private GameObject deadDori;
 
     
     [Header("Booleans")]
@@ -75,7 +77,6 @@ public class Fish : MonoBehaviour
         
         if (isHit)
         {
-            StopCoroutine(FishRandomMovement());
             transform.position = tridentManager.spikePos[randomIndex].position;
             Debug.Log(randomIndex);
             
@@ -85,17 +86,6 @@ public class Fish : MonoBehaviour
         if (isEaten)
         {
             transform.position = mouthPos.transform.position;
-        }
-
-        if (isInBucket)
-        {
-            GameManager.instance.fishesInBucket.Add(gameObject); //Add to the list every fishes IN BUCKET
-            Debug.Log("ADD FISH TO SHARK BUCKET");
-
-            fishRb.velocity = Vector3.zero;
-            fishRb.drag = 0;
-            StopCoroutine(FishRandomMovement());
-            isInBucket = false; //flag
         }
     }
     
@@ -120,13 +110,9 @@ public class Fish : MonoBehaviour
 
         transform.DOLookAt(randomPoint, 0.5f);
         fishRb.AddForce((randomPoint - transform.position) * fishSO.moveSpeed, ForceMode.Impulse);
+        yield return new WaitForSeconds(Random.Range(1f, 10f));
 
-        if (!isHit || !isInBucket)
-        {
-            yield return new WaitForSeconds(Random.Range(1f, 10f));
-            Debug.Log(gameObject.name + ": FISH MOVES");
-            StartCoroutine(FishRandomMovement());
-        }
+        StartCoroutine(FishRandomMovement());
     }
 
     IEnumerator DisappearFish()
@@ -142,16 +128,10 @@ public class Fish : MonoBehaviour
         yield return new WaitForSeconds(1f);
 
         isEaten = false;
-        isInBucket = true;
         Instantiate(fishBone, transform.position, Quaternion.identity); //Spawn FishBone
-        transform.DOMove(tridentManager.sharkBucketPos[Random.Range(0, tridentManager.sharkBucketPos.Length)].position, 0.3f);
-        fishRb.velocity = Vector3.zero;
-        fishRb.useGravity = true;
-        fishCapsuleCollider.enabled = true;
         yield return new WaitForSeconds(0.3f);
 
-        transform.DOScale(new Vector3(4f, 4f, 4f), 1f).SetEase(Ease.OutQuad);
-        transform.GetComponent<Fish>().enabled = false;
+        Instantiate(deadNemo, tridentManager.sharkBucketPos[Random.Range(0, tridentManager.sharkBucketPos.Length)].position, Quaternion.identity);
 
     }
 }

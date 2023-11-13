@@ -289,6 +289,10 @@ MonoBehaviour:
   fishBone: {fileID: 2040189368847298977, guid: 3588fbea8b7c1bd44ad0f8a0825c5694,
     type: 3}
   trailEatBloodParticle: {fileID: 4829470589930859777}
+  deadNemo: {fileID: 4151103968106573824, guid: 361ef59ba9e16bb4b90514c5cc79c3fb,
+    type: 3}
+  deadDori: {fileID: 4318797316932603862, guid: 99384e992b8425d4ab9d363b3be89f94,
+    type: 3}
   isHit: 0
   isEaten: 0
   isInBucket: 0
