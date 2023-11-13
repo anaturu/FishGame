@@ -166,6 +166,7 @@ public class UIManager : MonoBehaviour
 
         sharkScoreEndGame.enabled = false;
         playerScoreEndGame.enabled = false;
+        Cursor.visible = true;
 
         if (currentFishCaught >= currentSharkScore) //Si player a plus de poissons que le requin
         {

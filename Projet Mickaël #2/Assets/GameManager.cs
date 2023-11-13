@@ -50,7 +50,6 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         StartCoroutine(SpawnBlobFish());
-        Cursor.visible = false;
     }
 
     private void Update()

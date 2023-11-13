@@ -26,6 +26,7 @@ public class ButtonManager : MonoBehaviour
             else if (!isPaused) //Si le menu Pause est fermé
             {
                PauseGame(); //Ouvre le menu Pause
+               Cursor.visible = true;
             }
          } 
       }
@@ -99,6 +100,8 @@ public class ButtonManager : MonoBehaviour
 
    public void PlayButton()
    {
+      Cursor.visible = false;
+
       SceneManager.LoadScene("PlayScene");
       Debug.Log("PLAY THE GAME");
    }
