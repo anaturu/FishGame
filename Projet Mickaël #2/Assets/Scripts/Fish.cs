@@ -16,19 +16,15 @@ public class Fish : MonoBehaviour
     [Header("Components")]
     [SerializeField] private Animator fishAnimator;
     [SerializeField] private Rigidbody fishRb;
-    [SerializeField] private CapsuleCollider fishCapsuleCollider;
     [SerializeField] private BoxCollider fishBc;
     [SerializeField] private GameObject mouthPos;
     [SerializeField] private GameObject fishBone;
     [SerializeField] private ParticleSystem trailEatBloodParticle;
-    [SerializeField] private GameObject deadNemo;
-    [SerializeField] private GameObject deadDori;
 
     
     [Header("Booleans")]
     [SerializeField] public bool isHit;
     [SerializeField] public bool isEaten;
-    [SerializeField] public bool isInBucket;
 
     [Header("Values")] 
     private int randomIndex;
@@ -44,14 +40,12 @@ public class Fish : MonoBehaviour
         gameManager = GameManager.instance;
         fishRb = GetComponent<Rigidbody>();
         fishBc = GetComponent<BoxCollider>();
-        fishCapsuleCollider = GetComponent<CapsuleCollider>();
         fishAnimator = GetComponent<Animator>();
         mouthPos = GameObject.Find("Shark").transform.GetChild(2).gameObject;
 
         randomIndex = Random.Range(0, tridentManager.spikePos.Length);
 
         isEaten = false;
-        isInBucket = false;
         
         GameManager.instance.fishes.Add(gameObject); //Add to the list every fishes
         
@@ -131,7 +125,7 @@ public class Fish : MonoBehaviour
         Instantiate(fishBone, transform.position, Quaternion.identity); //Spawn FishBone
         yield return new WaitForSeconds(0.3f);
 
-        Instantiate(deadNemo, tridentManager.sharkBucketPos[Random.Range(0, tridentManager.sharkBucketPos.Length)].position, Quaternion.identity);
+        Instantiate(tridentManager.deadNemo, tridentManager.sharkBucketPos[Random.Range(0, tridentManager.sharkBucketPos.Length)].position, Quaternion.identity);
 
     }
 }

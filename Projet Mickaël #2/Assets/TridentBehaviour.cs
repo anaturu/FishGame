@@ -25,8 +25,8 @@ public class TridentBehaviour : MonoBehaviour
     private Rigidbody tridentRb;
     private BoxCollider tridentBc;
     private Vector3 tridentPos;
-    
-    [SerializeField] private List<GameObject> fishCaught = new List<GameObject>();
+    public GameObject deadNemo;
+    public GameObject deadDori;
     
     [Header("Values")]
     [SerializeField] private float explosionPower;
@@ -112,25 +112,14 @@ public class TridentBehaviour : MonoBehaviour
             other.transform.GetComponent<BoxCollider>().enabled = false; //Deactivate fish collider when hit
             other.transform.DOScale(new Vector3(0.8f, 0.8f, 0.8f), 0.3f);
             
-            fishCaught.Add(other.gameObject); //Add Fish Caught to list
-            
             uiManager.AddScoreFish(clownFishSO.addScore); //Add OverallScore
             uiManager.AddFishCounter(1); //Add FishCounter
             yield return new WaitForSeconds(2f);
             
             other.transform.DOScale(Vector3.zero, 0.3f);
-            other.transform.GetComponent<Fish>().isHit = false;
-            //other.transform.GetComponent<BoxCollider>().enabled = true;
-            //other.transform.GetComponent<BoxCollider>().isTrigger = false;
-            other.transform.GetComponent<CapsuleCollider>().enabled = true;
             yield return new WaitForSeconds(0.3f);
             
-            other.transform.GetComponent<Fish>().isInBucket = true;
-            gameManager.fishesInBucket.Add(other.gameObject);
-            other.transform.GetComponent<Fish>().enabled = false;
-            other.transform.GetComponent<Rigidbody>().useGravity = true;
-            other.transform.GetComponent<Rigidbody>().drag = 0;
-            other.transform.DOMove(bucketPos[Random.Range(0, bucketPos.Length)].position, 0.3f);
+            Instantiate(deadNemo, sharkBucketPos[Random.Range(0, sharkBucketPos.Length)].position, Quaternion.identity);
             yield return new WaitForSeconds(0.3f);
             
             other.transform.DOScale(new Vector3(4f, 4f, 4f), 0.3f);
@@ -141,8 +130,6 @@ public class TridentBehaviour : MonoBehaviour
             other.transform.GetComponent<Fish>().isHit = true;
             other.transform.GetComponent<BoxCollider>().enabled = false; //Deactivate fish collider when hit
             other.transform.DOScale(new Vector3(0.8f, 0.8f, 0.8f), 0.3f);
-            
-            fishCaught.Add(other.gameObject); //Add Fish Caught to list
             
             uiManager.AddScoreFish(doriSO.addScore); //Add OverallScore
             uiManager.AddFishCounter(1); //Add FishCounter
@@ -155,13 +142,9 @@ public class TridentBehaviour : MonoBehaviour
             other.transform.GetComponent<CapsuleCollider>().enabled = true;
             yield return new WaitForSeconds(0.3f);
             
-            other.transform.GetComponent<Fish>().isInBucket = true;
-            other.transform.GetComponent<Fish>().enabled = false;
-            other.transform.GetComponent<Rigidbody>().useGravity = true;
-            other.transform.DOMove(bucketPos[Random.Range(0, bucketPos.Length)].position, 0.3f);
-            yield return new WaitForSeconds(0.3f);
             
-            other.transform.DOScale(new Vector3(4f, 4f, 4f), 0.3f);
+            Instantiate(deadDori, sharkBucketPos[Random.Range(0, sharkBucketPos.Length)].position, Quaternion.identity);
+            yield return new WaitForSeconds(0.3f);
         }
 
         
