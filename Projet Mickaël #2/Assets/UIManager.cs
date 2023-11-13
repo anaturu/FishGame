@@ -22,9 +22,14 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI scoreSharkText;
     [SerializeField] private TextMeshProUGUI timerText;
     [SerializeField] private TextMeshProUGUI endText;
+    [SerializeField] private TextMeshProUGUI winText;
+    [SerializeField] private TextMeshProUGUI loseText;
     [SerializeField] private GameObject playerBucket;
     [SerializeField] private GameObject sharkBucket;
     [SerializeField] private GameObject shark;
+    [SerializeField] private GameObject inGameUI;
+    [SerializeField] private GameObject endMenu;
+
 
     [Header("Values")] 
     [SerializeField] private float timeRemaining;
@@ -88,6 +93,9 @@ public class UIManager : MonoBehaviour
         
         //END GAME HERE
         
+        //Deactivate UI
+        inGameUI.SetActive(false);
+        
         //Deactivate Control Player
         tridentManager.enabled = false; 
         
@@ -99,7 +107,7 @@ public class UIManager : MonoBehaviour
         }
         
         //Deactivate Shark
-        shark.transform.DOScale(Vector3.zero, 1f).OnComplete(() =>
+        shark.transform.DOScale(Vector3.zero, 1f).SetEase(Ease.InElastic).OnComplete(() =>
         {
             shark.GetComponent<SharkBehaviour>().enabled = false;
         });
@@ -111,14 +119,11 @@ public class UIManager : MonoBehaviour
             {
                 fish.SetActive(false);
             });
-            
-            //Disappear All Fish)]
         }
         yield return new WaitForSeconds(2f);
 
-
         //Cam
-        gameManager.cam.transform.DOMove(new Vector3(distanceEndCam, 1, -20), timeDecalCamera);
+        gameManager.cam.transform.DOMove(new Vector3(distanceEndCam, 1, -20), timeDecalCamera).SetEase(Ease.Linear);
         
         endText.DOTMPFontSize(150, 1f).OnComplete(() =>
         {
@@ -127,23 +132,29 @@ public class UIManager : MonoBehaviour
         yield return new WaitForSeconds(timeDecalCamera);
         
         //Bucket
-        playerBucket.transform.DORotate(new Vector3(-280, 0, 90), timeEmptyBucket).SetEase(Ease.Linear);
+        playerBucket.transform.DORotate(new Vector3(-280, 0, 90), timeEmptyBucket).SetEase(Ease.InOutExpo);
         yield return new WaitForSeconds(timeEmptyBucket);
 
-        sharkBucket.transform.DORotate(new Vector3(-280, 0, 90), timeEmptyBucket).SetEase(Ease.Linear);
+        sharkBucket.transform.DORotate(new Vector3(-280, 0, 90), timeEmptyBucket).SetEase(Ease.InOutExpo);
         yield return new WaitForSeconds(timeEmptyBucket);
-
 
         if (currentFishCaught >= currentSharkScore) //Si player a plus de poissons que le requin
         {
             //Win Player
+            endMenu.SetActive(true);
+            loseText.enabled = false;
+            winText.enabled = true;
+            
             Debug.Log("PLAYER HAS WON");
         }
         else
         {
             //Win Shark
-            Debug.Log("SHARK HAS WON");
+            endMenu.SetActive(true);
+            winText.enabled = false;
+            loseText.enabled = true;
 
+            Debug.Log("SHARK HAS WON");
         }
         
     }

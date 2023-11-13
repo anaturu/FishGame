@@ -87,6 +87,10 @@ public class ButtonManager : MonoBehaviour
       Time.timeScale = 1f;
       SceneManager.LoadScene("MainMenu");
    }
+   public void ButtonPlayAgain()
+   {
+      SceneManager.LoadScene("PlayScene");
+   }
 
    #region MainMenu
 
